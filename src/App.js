@@ -24,17 +24,17 @@ function Square() {
 export default function Board() {
   return (
     <>
-      <div class="board-row">
+      <div className="board-row">
         <Square />
         <Square />
         <Square />
       </div>
-      <div class="board-row">
+      <div className="board-row">
         <Square />
         <Square />
         <Square />
       </div>
-      <div class="board-row">
+      <div className="board-row">
         <Square />
         <Square />
         <Square />

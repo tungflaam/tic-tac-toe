@@ -21,9 +21,13 @@ export default function Board() {
 }
 
 function Square({value}) {
+  function handleClick(){
+    alert('okkkk');
+  }
   return (
     <button 
       className="square" 
+      onClick={handleClick}
     >
       {value}
     </button>

@@ -1,29 +1,16 @@
-export default function Board() {
-  return (
-    <>
-      <div class="board-row">
-        <Square value="1" />
-        <Square value="2" />
-        <Square value="3" />
-      </div>
-      <div class="board-row">
-        <Square value="4" />
-        <Square value="5" />
-        <Square value="6" />
-      </div>
-      <div class="board-row">
-        <Square value="7" />
-        <Square value="8" />
-        <Square value="9" />
-      </div>
-    </>
-  )
-}
+import { useState } from "react";
 
-function Square({value}) {
+function Square() {
+
+  //value: store the current value of the Square in state, 
+  //setValue: and change it when the Square is clicked.
+  const [value, setValue] = useState(null);
+
   function handleClick(){
-    alert('okkkk');
+    //change Square value on click
+    setValue('X');
   }
+
   return (
     <button 
       className="square" 
@@ -33,4 +20,27 @@ function Square({value}) {
     </button>
   )
 }
+
+export default function Board() {
+  return (
+    <>
+      <div class="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div class="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div class="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+    </>
+  )
+}
+
 

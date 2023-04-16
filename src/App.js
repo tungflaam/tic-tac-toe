@@ -59,21 +59,42 @@ function Board({xIsNext, squares, handlePlay}) {
 export default function Game(){
   //Array(0).fill(null): create an array with 9 elements and set them to null;
   //Each entry in the array corresponds to the value of a square 
-  const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
-  const currentSquares = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
   function handlePlay(nextSquares) {
     //creates a new array that contains all the items in history, followed by nextSquares
-    setHistory([...history, nextSquares]);
-    setXIsNext(!xIsNext);
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+    
   }
+
+  function jumpTo(nextMove) {
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((squares, move)=> {
+    let description;
+    if (move > 0) {
+      description = 'Go to move #' + move;
+    } else {
+      description = 'Go to game start';
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  })
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} handlePlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol></ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   );
